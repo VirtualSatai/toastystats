@@ -1,11 +1,17 @@
 import sys
-import AO3search
-from convert import convertToAO3
-import time
-from toastyTools import getListFromTextFile, getNumWorksFromURL, setupUrllib, getAO3SimpleTagURL, getAO3TagWordCountURL
+from toastyTools import (
+    getListFromTextFile,
+    getNumWorksFromURL,
+    setupUrllib,
+    getAO3SimpleTagURL,
+    getAO3TagWordCountURL,
+)
 
 if len(sys.argv) < 5:
-    sys.exit('Usage: %s tagfile csvfile min_word_count max_word_count (e.g., getWordCountInfo tags.txt out.csv "50000" "")' % sys.argv[0])
+    sys.exit(
+        'Usage: %s tagfile csvfile min_word_count max_word_count (e.g., getWordCountInfo tags.txt out.csv "50000" "")'
+        % sys.argv[0]
+    )
 
 verbose = True
 
@@ -20,19 +26,18 @@ fo = open(csvfile, "w")
 tags = getListFromTextFile(tagfile)
 
 # write headers
-fo.write("tag,num works,num works with "+minWC+"-"+maxWC+" words\n")
+fo.write("tag,num works,num works with " + minWC + "-" + maxWC + " words\n")
 
 
 for t in tags:
-    fo.write(t.encode('utf-8') + ",")
+    fo.write(t.encode("utf-8") + ",")
     if verbose:
         print(t)
-        
+
     includeTags = []
     excludeTags = []
     urls = []
     setupUrllib()
-
 
     # url for tag's works
     urls.append(getAO3SimpleTagURL(t))
@@ -43,9 +48,9 @@ for t in tags:
         numWorks = getNumWorksFromURL(u, True)
         if verbose:
             print(numWorks)
-        fo.write(str(numWorks).encode('utf-8') + ",")
-    
+        fo.write(str(numWorks).encode("utf-8") + ",")
+
     fo.write("\n")
-    
+
 
 fo.close()

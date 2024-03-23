@@ -1,11 +1,10 @@
 import sys
 import importJSON
-import AO3search
-import time
-#import pdb
+
+# import pdb
 
 if len(sys.argv) < 3:
-    sys.exit('Usage: %s urlfile csvfile [-verbose]' % sys.argv[0])
+    sys.exit("Usage: %s urlfile csvfile [-verbose]" % sys.argv[0])
 
 verbose = False
 
@@ -27,9 +26,9 @@ searchList[0].printCSVHeaders(fo)
 for s in searchList:
 
     s.createSearchURL()
-#    pdb.set_trace()
-    try: 
-        tmp = s.searchURL.decode('utf-8')
+    #    pdb.set_trace()
+    try:
+        tmp = s.searchURL.decode("utf-8")
         s.searchURL = tmp
         if verbose:
             print("SUCCESS: decode URL")

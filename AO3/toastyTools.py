@@ -1,10 +1,8 @@
-import codecs
 import csv
 import importlib
 import io
 import operator
 import re
-import string
 import sys
 import time
 

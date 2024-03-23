@@ -1,11 +1,8 @@
-import re
 import sys
-import os
-import pdb
 
 
 if len(sys.argv) < 3:
-    sys.exit('Usage: %s fandomfile csvfile [-verbose]' % sys.argv[0])
+    sys.exit("Usage: %s fandomfile csvfile [-verbose]" % sys.argv[0])
 
 verbose = False
 
@@ -20,14 +17,13 @@ outputf = sys.argv[2]
 ao3data = open(outputf).read()
 for fandom in open(fanf):
     fandom = fandom.rstrip()
-#    pattern = re.compile("^" + fandom)
+    #    pattern = re.compile("^" + fandom)
     pattern = "\n" + fandom
     if pattern in ao3data:
-#    if re.search(pattern, ao3data) is not None:
-        if (verbose):
+        #    if re.search(pattern, ao3data) is not None:
+        if verbose:
             print("FOUND: ", fandom)
     else:
-#        print "MISSING: ", fandom
-#        pdb.set_trace()
+        #        print "MISSING: ", fandom
+        #        pdb.set_trace()
         print(fandom)
-

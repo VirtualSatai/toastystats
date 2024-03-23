@@ -1,16 +1,12 @@
-from bs4 import BeautifulSoup
-import urllib3
-import certifi
-import re
 import sys
-import string
-import csv
-import time
-import codecs
-import operator
-import convert
 import AO3search
-from toastyTools import getArguments, setupUrllib, getSearchURL, mergeDictionaries, writeDictToCSV
+from toastyTools import (
+    getArguments,
+    setupUrllib,
+    getSearchURL,
+    mergeDictionaries,
+    writeDictToCSV,
+)
 
 # GLOBAL VARIABLES
 DEBUG = 0
@@ -19,7 +15,11 @@ DEBUG = 0
 ############# BEGIN MAIN FUNCTION
 
 numArgs = 5
-args = getArguments(sys.argv, numArgs, 'Usage: topCharacters [primary tag] [include tags file] [exclude tags file] [recursion depth [chars out] (e.g.: topCharacters "F/F" "include.tags" "exclude.tags" 10 "characters.csv"")\n')
+args = getArguments(
+    sys.argv,
+    numArgs,
+    'Usage: topCharacters [primary tag] [include tags file] [exclude tags file] [recursion depth [chars out] (e.g.: topCharacters "F/F" "include.tags" "exclude.tags" 10 "characters.csv"")\n',
+)
 
 if DEBUG:
     print(args)
@@ -36,8 +36,8 @@ excludeTags = []
 # the Sort & Filter sidebar
 topCharacters = {}
 
-includeTags = [line.rstrip('\n') for line in open(includefile)]
-excludeTags = [line.rstrip('\n') for line in open(excludefile)]
+includeTags = [line.rstrip("\n") for line in open(includefile)]
+excludeTags = [line.rstrip("\n") for line in open(excludefile)]
 if DEBUG:
     print(includeTags)
     print(excludeTags)
@@ -61,8 +61,8 @@ for i in range(recursionDepth):
         print(chars)
 
     # merge the dictionaries into topFandoms and topShips
-#    topFandoms = mergeDictionaries(topFandoms, fandoms)
-#    topShips = mergeDictionaries(topShips, ships)
+    #    topFandoms = mergeDictionaries(topFandoms, fandoms)
+    #    topShips = mergeDictionaries(topShips, ships)
     topCharacters = mergeDictionaries(topCharacters, chars)
 
     # exclude the top ships (but not the fandoms, because there may be
@@ -72,5 +72,5 @@ for i in range(recursionDepth):
     if DEBUG:
         print(topCharacters)
         print(excludeTags)
-    
+
     writeDictToCSV(topCharacters, charOut)

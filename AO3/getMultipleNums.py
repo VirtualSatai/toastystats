@@ -1,11 +1,10 @@
 import sys
-import time
 import os
 
-#def getNum(url):
+# def getNum(url):
 
 if len(sys.argv) < 2:
-    sys.exit('Usage: %s URLfile [-verbose]' % sys.argv[0])
+    sys.exit("Usage: %s URLfile [-verbose]" % sys.argv[0])
 
 verbose = False
 
@@ -32,13 +31,12 @@ for u in urls:
     if verbose:
         print("******\n")
 
-    u = u.rstrip('\n')
-
+    u = u.rstrip("\n")
 
     if verbose:
         cmd = 'python getNum.py "' + u + '" -v'
     else:
-        cmd = 'python getNum.py "' + u + '"' 
+        cmd = 'python getNum.py "' + u + '"'
 
     if verbose:
         print("cmd: ", cmd)

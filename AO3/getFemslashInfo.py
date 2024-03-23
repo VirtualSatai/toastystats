@@ -1,11 +1,18 @@
 import sys
-import AO3search
-from convert import convertToAO3
-import time
-from toastyTools import getListFromTextFile, getAO3TagURL, getAO3TagTimeframeURL, getNumWorksFromURL, setupUrllib, getAO3SimpleTagURL
+from toastyTools import (
+    getListFromTextFile,
+    getAO3TagURL,
+    getAO3TagTimeframeURL,
+    getNumWorksFromURL,
+    setupUrllib,
+    getAO3SimpleTagURL,
+)
 
 if len(sys.argv) < 5:
-    sys.exit('Usage: %s tagfile csvfile startdate enddate (e.g., getFemslashInfo tags.txt out.csv "2020-01-01" "2020-12-31")' % sys.argv[0])
+    sys.exit(
+        'Usage: %s tagfile csvfile startdate enddate (e.g., getFemslashInfo tags.txt out.csv "2020-01-01" "2020-12-31")'
+        % sys.argv[0]
+    )
 
 verbose = True
 
@@ -20,19 +27,24 @@ fo = open(csvfile, "w")
 tags = getListFromTextFile(tagfile)
 
 # write headers
-fo.write("tag,num works,F/F,F/F -M/M -F/M,F/F -M/M -F/M between "+startdate+" and "+enddate+"\n")
+fo.write(
+    "tag,num works,F/F,F/F -M/M -F/M,F/F -M/M -F/M between "
+    + startdate
+    + " and "
+    + enddate
+    + "\n"
+)
 
 
 for t in tags:
     fo.write(t + ",")
     if verbose:
         print(t)
-        
+
     includeTags = []
     excludeTags = []
     urls = []
     setupUrllib()
-
 
     # url for tag's num works
     urls.append(getAO3SimpleTagURL(t))
@@ -52,8 +64,8 @@ for t in tags:
         if verbose:
             print(numWorks)
         fo.write(str(numWorks) + ",")
-    
+
     fo.write("\n")
-    
+
 
 fo.close()

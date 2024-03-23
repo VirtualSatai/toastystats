@@ -1,15 +1,11 @@
-from bs4 import BeautifulSoup
-import urllib3
-import re
 import sys
-import time
-import os
-#import toastytools
+
+# import toastytools
 from toastyTools import getSoupFromURL
 
 
 if len(sys.argv) < 2:
-    sys.exit('Usage: %s URLfile [-verbose]' % sys.argv[0])
+    sys.exit("Usage: %s URLfile [-verbose]" % sys.argv[0])
 
 verbose = False
 
@@ -37,21 +33,19 @@ for u in urls:
     if verbose:
         print("******\n")
 
-    u = u.rstrip('\n')
+    u = u.rstrip("\n")
 
     if verbose:
         print("fetching page: ", u)
 
     if verbose:
         print("Pausing so as not to DOS AO3...")
-    
+
     soup = getSoupFromURL(u)
 
-    
     # extract the fandom names
-    tmpList = soup.findAll("a", {"class" : "tag"})
+    tmpList = soup.findAll("a", {"class": "tag"})
 
-    #just grab the text part
+    # just grab the text part
     for link in tmpList:
-        print(link.text.encode('utf-8'))
-
+        print(link.text.encode("utf-8"))

@@ -1,12 +1,24 @@
 import sys
-from toastyTools import getArguments, getListFromTextFile, prepCSVOutfile, getAO3LanguageTimeframeURL,getNumWorksFromURL, writeFieldToCSV, writeEndlineToCSV
+from toastyTools import (
+    getArguments,
+    getListFromTextFile,
+    prepCSVOutfile,
+    getAO3LanguageTimeframeURL,
+    getNumWorksFromURL,
+    writeFieldToCSV,
+    writeEndlineToCSV,
+)
 
-DEBUG=1
+DEBUG = 1
 
-infile, timeframe, singleChapter, outfile = getArguments(sys.argv, 4, 'Usage: getLanguageLimitedTimeData.py languageCodeFile timeframe singleChapter outfile (e.g., getLanguageLimitedData.py languageCodeList.txt "< 20 days" True out.csv');
+infile, timeframe, singleChapter, outfile = getArguments(
+    sys.argv,
+    4,
+    'Usage: getLanguageLimitedTimeData.py languageCodeFile timeframe singleChapter outfile (e.g., getLanguageLimitedData.py languageCodeList.txt "< 20 days" True out.csv',
+)
 
 langs = getListFromTextFile(infile)
-outfp = prepCSVOutfile(outfile, "language,works "+timeframe)
+outfp = prepCSVOutfile(outfile, "language,works " + timeframe)
 
 for langCode in langs:
     if DEBUG:
@@ -16,7 +28,7 @@ for langCode in langs:
     writeFieldToCSV(outfp, langCode)
 
     # get data on how many works exist for this language code overall and within limited timeframe, and write to CSV
-    limitedURL = getAO3LanguageTimeframeURL(langCode,timeframe,singleChapter)
+    limitedURL = getAO3LanguageTimeframeURL(langCode, timeframe, singleChapter)
     if DEBUG:
         print(limitedURL)
 
